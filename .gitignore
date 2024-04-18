@@ -834,6 +834,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# Simple
+test.py
+
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 

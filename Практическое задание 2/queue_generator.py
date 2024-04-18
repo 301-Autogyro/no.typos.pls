@@ -9,7 +9,7 @@ from prettytable import PrettyTable
 
 class QueueGenerator():
     '''Класс генератора очереди процессов'''
-    def __init__(self, process_count: int = 10, minimum_priority_level: int = 1, minimum_work_time: float = 10.0) -> None:
+    def __init__(self, process_count: int = 10, minimum_priority_level: int = 1, minimum_work_time: float = 10.0, process_max_time: float = 60.0) -> None:
         '''
         Инициализация класса.
 
@@ -24,12 +24,13 @@ class QueueGenerator():
         '''
         if minimum_priority_level not in range(1, 11):
             return 'Error'
-        if minimum_work_time <= 0:
+        if minimum_work_time < 0:
             return 'Error'
         
         self.process_count = process_count
         self.minimum_priority_level = minimum_priority_level
-        self.minimum_work_time = minimum_work_time    
+        self.minimum_work_time = minimum_work_time  
+        self.process_max_time = process_max_time  
 
     def generate_queue(self) -> list[dict]:
         '''Генерирует очередь процессов
@@ -46,7 +47,7 @@ class QueueGenerator():
         for i in range(self.process_count):
             process = {'id': i,
                        'priority': random.randint(self.minimum_priority_level, 10),
-                       'work_time': float(str(random.randint(self.minimum_work_time, 59)) + '.' + str(random.randint(0, 999)))}
+                       'work_time': float(str(random.randint(self.minimum_work_time, self.process_max_time-1)) + '.' + str(random.randint(0, 999)))}
             # добавляем процесс в список
             queue.append(process)
         
@@ -61,7 +62,7 @@ class QueueGenerator():
         # Возвращаем случайно созданный словарик
         return {'id': pid + 1,
                 'priority': random.randint(self.minimum_priority_level, 10),
-                'work_time': float(str(random.randint(self.minimum_work_time, 60)) + '.' + str(random.randint(0, 999)))}
+                'work_time': float(str(random.randint(self.minimum_work_time, self.process_max_time-1)) + '.' + str(random.randint(0, 999)))}
 
             
     def table_creator(self, queue: list[dict]):
