@@ -2,7 +2,7 @@
 import leksem
 from prettytable import PrettyTable
 
-f = open('C:\\code\\no.typos.pls\\Лабораторная работа 1\\programm.txt', 'r', encoding='utf-8')
+f = open('C:\\code\\no.typos.pls\\Лабораторная работа 2\\programm.txt', 'r', encoding='utf-8')
 
 lks = []
 str_num = 0
